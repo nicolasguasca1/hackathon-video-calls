@@ -7,6 +7,7 @@ import { NextApiResponse, NextApiRequest } from "next";
 // Initializing the cors middleware
 const cors = initMiddleware(
   Cors({
+    origin: "*",
     methods: ["GET", "POST", "OPTIONS"]
   })
 );
