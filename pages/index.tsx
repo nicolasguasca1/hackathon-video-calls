@@ -41,7 +41,7 @@ const Home: NextPage = () => {
 
         <AppBar position="static" color="inherit" className={styles.grid}>
           <a>
-            <h2> THIS IS THE APPBAR &rarr;</h2>
+            <h2> DECENTRALIZED VIDEO CHAT</h2>
           </a>
         </AppBar>
         <VideoPlayer />
