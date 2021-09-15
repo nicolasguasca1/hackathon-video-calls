@@ -24,6 +24,7 @@
     "simple-peer": "^9.11.0",
     "socket.io": "^4.2.0",
     "socket.io-client": "^4.2.0",
+    "twind": "^0.16.16",
     "video.js": "^7.14.3",
     "videojs-youtube": "^2.6.1"
   },

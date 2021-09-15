@@ -1,31 +1,68 @@
-import { useCallback, useEffect, useState } from "react";
-import React from "react";
-import styles from "../styles/Home.module.css";
+import React, { useCallback, useEffect, useState, useContext } from "react";
+import { Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 
-// import videojs from "video.js";
-// import "videojs-youtube";
+import { SocketContext } from "../Context";
+
+const useStyles = makeStyles((theme) => ({
+  video: {
+    width: "550px",
+    [theme.breakpoints.down("xs")]: {
+      width: "300px"
+    }
+  },
+  gridContainer: {
+    borderRadius: "15",
+    justifyContent: "center",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column"
+    }
+  },
+  paper: {
+    padding: "10px",
+    border: "2px solid gray",
+    margin: "10px"
+  }
+}));
 
 const VideoPlayer = (props: any) => {
-  //   const [videoEl, setVideoEl] = useState(null);
-  //   const onVideo = useCallback((el) => {
-  //     setVideoEl(el);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     if (videoEl == null) return;
-  //     const player = videojs(videoEl, props);
-  //     return () => {
-  //       player.dispose();
-  //     };
-  //   }, [props, videoEl]);
+  const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } =
+    useContext(SocketContext);
+  const classes = useStyles();
 
   return (
-    <>
-      <a href="https://nextjs.org/docs" className={styles.card}>
-        <h2>VideoPlayer &rarr;</h2>
-        <p>Click here to start a video call</p>
-      </a>
-    </>
+    <Grid container className={classes.gridContainer}>
+      {stream && (
+        <Paper className={classes.paper}>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" gutterBottom>
+              {name || "Name"}
+            </Typography>
+            <video
+              playsInline
+              muted
+              ref={myVideo}
+              autoPlay
+              className={classes.video}
+            />
+          </Grid>
+        </Paper>
+      )}
+      {callAccepted && !callEnded && (
+        <Paper className={classes.paper}>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" gutterBottom>
+              {call.name || "Name"}
+            </Typography>
+            <video
+              playsInline
+              ref={userVideo}
+              autoPlay
+              className={classes.video}
+            />
+          </Grid>
+        </Paper>
+      )}
+    </Grid>
   );
 };
 
