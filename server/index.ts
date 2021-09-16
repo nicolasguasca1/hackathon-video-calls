@@ -3,7 +3,9 @@ import * as http from "http";
 import next, { NextApiHandler } from "next";
 import * as socketio from "socket.io";
 
-// import cors from "../pages/api/cors";
+// import Cors from "cors";
+
+import allowCors from "../pages/api/cors";
 
 const port: number = parseInt(process.env.PORT || "5000", 10);
 const dev: boolean = process.env.NODE_ENV !== "production";
@@ -13,15 +15,20 @@ const nextHandler: NextApiHandler = nextApp.getRequestHandler();
 nextApp.prepare().then(async () => {
   const app: Express = express();
   const server: http.Server = http.createServer(app);
-  const io: socketio.Server = new socketio.Server();
+  const io: socketio.Server = new socketio.Server({
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST"]
+    }
+  });
   io.attach(server);
 
   app.get("/", async (_: Request, res: Response) => {
     res.send("Running");
   });
 
-  //   app.use(cors());
-
+  app.use("../pages/api/cors", allowCors);
+  // app.use(Cors());
   io.on("connection", (socket) => {
     socket.emit("me", socket.id);
 
@@ -41,6 +48,10 @@ nextApp.prepare().then(async () => {
   app.all("*", (req: any, res: any) => nextHandler(req, res));
 
   server.listen(port, () => {
-    console.log(`> Ready on http://localhost:${port}`);
+    console.log(
+      `> Server listening at http://localhost:${port} as ${
+        dev ? "development" : process.env.NODE_ENV
+      }`
+    );
   });
 });

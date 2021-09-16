@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "nodemon": "nodemon index.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@types/node": "^16.9.1",
     "@types/react": "17.0.20",
+    "@types/react-copy-to-clipboard": "^5.0.1",
     "@types/simple-peer": "^9.11.3",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
