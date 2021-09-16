@@ -2,7 +2,8 @@
 // import type { NextApiRequest, NextApiResponse } from 'next';
 import Cors from "cors";
 import initMiddleware from "../../lib/init-middleware";
-import { NextApiResponse, NextApiRequest } from "next";
+// import { NextApiRequest, NextApiResponse } from "next";
+import { Request, Response } from "express";
 
 // Initializing the cors middleware
 const cors = initMiddleware(
@@ -12,7 +13,7 @@ const cors = initMiddleware(
   })
 );
 
-export default async function allowCors(req, res) {
+export default async function allowCors(req: Request, res: Response) {
   // Run cors
   await cors(req, res);
 
