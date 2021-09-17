@@ -17,18 +17,18 @@ import { Auth } from "../components/Auth";
 // import PlayerCSS from "../components/playerCss";
 
 const Home: NextPage = () => {
-  const { isAuthenticated, logout } = useMoralis();
+  const { isAuthenticated, logout, user } = useMoralis();
 
   if (isAuthenticated) {
     return (
       <Container align="center">
-        <Heading mb={6}>Welcome to the decentralized LIVE Web</Heading>
-        <Button onClick={() => logout()}>Logout</Button>{" "}
-        <AppBar position="static" color="inherit" className={styles.grid}>
+        <Heading mb={6}>Welcome to the decentralized LIVE Web!</Heading>
+        <Button onClick={() => logout()}>Logout</Button>
+        {/* <AppBar position="static" color="inherit" className={styles.grid}>
           <a>
             <h2 color="black"> Start your session here!</h2>
           </a>
-        </AppBar>
+        </AppBar> */}
         <VideoPlayer />
         <Options>
           <Notifications />

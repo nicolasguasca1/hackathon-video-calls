@@ -4,10 +4,8 @@ import {
   Button,
   Alert,
   AlertIcon,
-  Box,
   AlertTitle,
   AlertDescription,
-  CloseButton,
   Text
 } from "@chakra-ui/react";
 import React, { useState } from "react";
